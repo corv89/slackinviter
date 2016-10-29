@@ -3,10 +3,10 @@
   "description": "Let people invite themselves to your Slack",
   "logo": "https://i.imgur.com/odDO1Fx.png",
   "keywords": ["go", "slack"],
-  "image": "heroku/go:1.6",
-  "mount_dir": "http://github.com/flexd/slackinviter",
-  "website": "https://github.com/flexd/slackinviter",
-  "repository": "https://github.com/flexd/slackinviter",
+  "image": "heroku/go:1.7",
+  "mount_dir": "http://github.com/sevus/slackinviter",
+  "website": "https://github.com/sevus/slackinviter",
+  "repository": "https://github.com/sevus/slackinviter",
   "env": {
     "SLACKINVITER_SLACKTOKEN": {
       "description": "A Slack API token (find it on https://api.slack.com/web)",
