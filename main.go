@@ -33,7 +33,6 @@ var (
 	missingFirstName,
 	missingLastName,
 	missingEmail,
-	missingCoC,
 	successfulCaptcha,
 	failedCaptcha,
 	invalidCaptcha,
@@ -66,7 +65,6 @@ func init() {
 	m.Set("missing_first_name", &missingFirstName)
 	m.Set("missing_last_name", &missingLastName)
 	m.Set("missing_email", &missingEmail)
-	m.Set("missing_coc", &missingCoC)
 	m.Set("failed_captcha", &failedCaptcha)
 	m.Set("invalid_captcha", &invalidCaptcha)
 	m.Set("successful_captcha", &successfulCaptcha)
@@ -204,7 +202,6 @@ func handleInvite(w http.ResponseWriter, r *http.Request) {
 	fname := r.FormValue("fname")
 	lname := r.FormValue("lname")
 	email := r.FormValue("email")
-	coc := r.FormValue("coc")
 	if email == "" {
 		missingEmail.Add(1)
 		http.Error(w, "Missing email", http.StatusPreconditionFailed)
@@ -218,11 +215,6 @@ func handleInvite(w http.ResponseWriter, r *http.Request) {
 	if lname == "" {
 		missingLastName.Add(1)
 		http.Error(w, "Missing last name", http.StatusPreconditionFailed)
-		return
-	}
-	if coc != "1" {
-		missingCoC.Add(1)
-		http.Error(w, "You need to accept the code of conduct", http.StatusPreconditionFailed)
 		return
 	}
 	err = api.InviteToTeam("Gophers", fname, lname, email)
