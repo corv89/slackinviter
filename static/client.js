@@ -5,8 +5,8 @@ var request = superagent;
 var select = body.querySelector('select');
 var input = body.querySelector('input');
 var email = body.querySelector('input[name=email]');
-var first_name = body.querySelector('input[name=fname]');
-var last_name = body.querySelector('input[name=lname]');
+// var first_name = body.querySelector('input[name=fname]');
+// var last_name = body.querySelector('input[name=lname]');
 var coc = body.querySelector('input[name=coc]');
 var button = body.querySelector('button');
 
@@ -19,7 +19,7 @@ body.addEventListener('submit', function(ev){
   button.disabled = true;
   button.className = '';
   button.innerHTML = 'Please Wait';
-  invite(coc && coc.checked ? 1 : 0, email.value, first_name.value, last_name.value, document.getElementById("g-recaptcha-response").value, function(err){
+  invite(email.value, document.getElementById("g-recaptcha-response").value, function(err){
     if (err) {
       button.removeAttribute('disabled');
       button.className = 'error';
@@ -32,15 +32,14 @@ body.addEventListener('submit', function(ev){
 });
 
 
-function invite(coc, email, first_name, last_name, recaptcha_res, fn){
+function invite(email, recaptcha_res, fn){
   request
   .post('/invite/')
   .type('form')
   .send({
-    coc: coc,
     email: email,
-    fname: first_name,
-    lname: last_name,
+    fname: ' ',
+    lname: ' ',
     "g-recaptcha-response": recaptcha_res
   })
   .end(function(res){
